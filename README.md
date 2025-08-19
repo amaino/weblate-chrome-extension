@@ -1,5 +1,7 @@
 # Weblate Chrome Extension
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A Chrome extension that enables in-context editing of translation strings directly on web pages using the Weblate API.
 
 ## Features
