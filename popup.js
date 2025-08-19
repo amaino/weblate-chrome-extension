@@ -20,7 +20,8 @@ class WeblatePopup {
         'targetAttribute',
         'project',
         'component',
-        'language'
+        'language',
+        'requireMetaTag'
       ]);
       
       // Populate form fields
@@ -46,6 +47,9 @@ class WeblatePopup {
       } else {
         document.getElementById('language').value = 'en';
       }
+      
+      // Set requireMetaTag checkbox (default to true)
+      document.getElementById('requireMetaTag').checked = config.requireMetaTag !== false;
       
     } catch (error) {
       console.error('Failed to load configuration:', error);
@@ -91,7 +95,8 @@ class WeblatePopup {
         targetAttribute: document.getElementById('targetAttribute').value.trim() || 'data-lokalise',
         project: document.getElementById('project').value.trim(),
         component: document.getElementById('component').value.trim(),
-        language: document.getElementById('language').value.trim() || 'en'
+        language: document.getElementById('language').value.trim() || 'en',
+        requireMetaTag: document.getElementById('requireMetaTag').checked
       };
 
       // Validate required fields

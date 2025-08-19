@@ -7,23 +7,71 @@ class WeblateContentEditor {
   }
 
   async init() {
-    // Load configuration from storage
+    // Load configuration from storage first
     await this.loadConfig();
+    
+    // Then check if this page should have Weblate editing enabled
+    if (!this.shouldActivateOnPage()) {
+      console.log('Weblate extension: Page not marked for translation editing');
+      return;
+    }
     
     // Only proceed if we have valid configuration
     if (this.config && this.config.weblateUrl && this.config.apiKey) {
+      console.log('Weblate extension: Activated on page');
       this.scanAndAddIcons();
       this.setupMutationObserver();
     }
   }
 
+  shouldActivateOnPage() {
+    // If meta tag requirement is disabled, always activate
+    if (this.config && this.config.requireMetaTag === false) {
+      return true;
+    }
+    
+    // Check for meta tag indicating this page supports Weblate editing
+    const metaTag = document.querySelector('meta[name="weblate-enabled"]');
+    if (metaTag) {
+      return true;
+    }
+    
+    // Check for data attribute on html element
+    const htmlElement = document.documentElement;
+    if (htmlElement.hasAttribute('data-weblate-enabled')) {
+      return true;
+    }
+    
+    // Check for specific class on body or html
+    if (document.body && document.body.classList.contains('weblate-enabled')) {
+      return true;
+    }
+    if (htmlElement.classList.contains('weblate-enabled')) {
+      return true;
+    }
+    
+    // Optional: Allow override via URL parameter (for development/testing)
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('weblate-force') === 'true') {
+      return true;
+    }
+    
+    return false;
+  }
+
   async loadConfig() {
     try {
-      const result = await chrome.storage.sync.get(['weblateUrl', 'apiKey', 'targetAttribute']);
+      const result = await chrome.storage.sync.get([
+        'weblateUrl', 
+        'apiKey', 
+        'targetAttribute',
+        'requireMetaTag'
+      ]);
       this.config = {
         weblateUrl: result.weblateUrl,
         apiKey: result.apiKey,
-        targetAttribute: result.targetAttribute || 'data-lokalise'
+        targetAttribute: result.targetAttribute || 'data-lokalise',
+        requireMetaTag: result.requireMetaTag !== false // Default to true
       };
       this.targetAttribute = this.config.targetAttribute;
     } catch (error) {

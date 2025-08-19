@@ -34,6 +34,7 @@ For more complex Weblate setups, you can configure:
 - **Project**: Specific Weblate project name
 - **Component**: Specific Weblate component name  
 - **Language**: Target language code (default: `en`)
+- **Require Meta Tag**: Only activate on pages with `<meta name="weblate-enabled">` (recommended for security)
 
 ## Usage
 
@@ -44,6 +45,33 @@ For more complex Weblate setups, you can configure:
 5. The page content and Weblate translation will be updated immediately
 
 ## HTML Markup Requirements
+
+### Page Activation (Recommended)
+
+For security and performance, the extension can be configured to only activate on pages that explicitly opt-in. Add this meta tag to your page's `<head>`:
+
+```html
+<meta name="weblate-enabled" content="true">
+```
+
+### Alternative Activation Methods
+
+```html
+<!-- Option 1: Meta tag (recommended) -->
+<meta name="weblate-enabled" content="true">
+
+<!-- Option 2: HTML data attribute -->
+<html data-weblate-enabled>
+
+<!-- Option 3: CSS class on html or body -->
+<html class="weblate-enabled">
+<body class="weblate-enabled">
+
+<!-- Option 4: URL parameter (development only) -->
+<!-- Add ?weblate-force=true to any URL -->
+```
+
+### Translation Attributes
 
 Add the translation attribute to any HTML element you want to make editable:
 
