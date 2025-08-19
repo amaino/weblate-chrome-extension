@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "Weblate In-Content Editor",
+  "version": "1.0.0",
+  "description": "Edit translations directly on web pages using Weblate API",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_end"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Weblate Editor Settings"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["dialog.html", "dialog.js", "dialog.css"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

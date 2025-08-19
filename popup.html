@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weblate Editor Configuration</title>
+  <style>
+    body {
+      width: 400px;
+      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .header h1 {
+      color: #4CAF50;
+      margin: 0 0 5px 0;
+      font-size: 20px;
+    }
+    
+    .header p {
+      color: #666;
+      margin: 0;
+      font-size: 14px;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #333;
+      font-size: 14px;
+    }
+    
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #4CAF50;
+      box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+    }
+    
+    .btn {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      width: 100%;
+      transition: background 0.2s ease;
+    }
+    
+    .btn:hover {
+      background: #45a049;
+    }
+    
+    .btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    
+    .status {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 4px;
+      font-size: 14px;
+      text-align: center;
+    }
+    
+    .status.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    
+    .status.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    
+    .help-text {
+      font-size: 12px;
+      color: #666;
+      margin-top: 5px;
+    }
+    
+    .advanced-section {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+    
+    .advanced-toggle {
+      background: none;
+      border: none;
+      color: #4CAF50;
+      cursor: pointer;
+      font-size: 14px;
+      text-decoration: underline;
+      padding: 0;
+      margin-bottom: 15px;
+    }
+    
+    .advanced-content {
+      display: none;
+    }
+    
+    .advanced-content.show {
+      display: block;
+    }
+    
+    .status.hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Weblate Editor</h1>
+    <p>Configure your Weblate instance</p>
+  </div>
+
+  <form id="configForm">
+    <div class="form-group">
+      <label for="weblateUrl">Weblate URL:</label>
+      <input type="url" id="weblateUrl" placeholder="https://your-weblate-instance.com" required>
+      <div class="help-text">Full URL to your Weblate instance (e.g., https://hosted.weblate.org)</div>
+    </div>
+
+    <div class="form-group">
+      <label for="apiKey">API Token:</label>
+      <input type="password" id="apiKey" placeholder="Your Weblate API token" required>
+      <div class="help-text">Get your API token from Weblate Settings → API access</div>
+    </div>
+
+    <div class="form-group">
+      <label for="targetAttribute">Target Attribute:</label>
+      <input type="text" id="targetAttribute" value="data-lokalise" placeholder="data-lokalise">
+      <div class="help-text">HTML attribute that identifies translatable elements</div>
+    </div>
+
+    <button type="submit" class="btn" id="saveBtn">Save Configuration</button>
+
+    <div class="advanced-section">
+      <button type="button" class="advanced-toggle" id="advancedToggle">Advanced Settings</button>
+      <div class="advanced-content" id="advancedContent">
+        <div class="form-group">
+          <label for="project">Project (optional):</label>
+          <input type="text" id="project" placeholder="your-project">
+          <div class="help-text">Weblate project name (if using component-specific API)</div>
+        </div>
+
+        <div class="form-group">
+          <label for="component">Component (optional):</label>
+          <input type="text" id="component" placeholder="your-component">
+          <div class="help-text">Weblate component name (if using component-specific API)</div>
+        </div>
+
+        <div class="form-group">
+          <label for="language">Language (optional):</label>
+          <input type="text" id="language" placeholder="en" value="en">
+          <div class="help-text">Target language code for translations</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="status" class="status hidden"></div>
+  </form>
+
+  <script src="popup.js"></script>
+</body>
+</html>

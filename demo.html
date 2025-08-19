@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weblate Extension Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .demo-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        .translatable {
+            background: #e3f2fd;
+            padding: 6px 10px;
+            border-radius: 4px;
+            margin: 2px;
+            display: inline-block;
+            border: 1px solid #bbdefb;
+            transition: background-color 0.2s ease;
+            position: relative;
+        }
+        .translatable:hover {
+            background: #d1ecf1;
+            border-color: #4CAF50;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        .instructions {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .code {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 14px;
+            overflow-x: auto;
+        }
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="instructions">
+        <strong>Instructions:</strong>
+        <ol>
+            <li>Load the Weblate Chrome extension</li>
+            <li>Configure your Weblate URL and API token in the extension popup</li>
+            <li>Reload this page</li>
+            <li>Hover over the highlighted elements below to see edit icons (✏️)</li>
+            <li>Click the icons to edit translations</li>
+        </ol>
+    </div>
+
+    <h1 data-lokalise="page_title">Demo Page for Weblate Extension</h1>
+    
+    <div class="demo-section">
+        <h2 data-lokalise="section_basic_elements">Basic Elements</h2>
+        <p>This page demonstrates various HTML elements with the <code>data-lokalise</code> attribute that the Weblate extension can detect and make editable.</p>
+        
+        <p data-lokalise="welcome_message" class="translatable">Welcome to our website! This text can be edited.</p>
+        
+        <button data-lokalise="button_submit" class="translatable">Submit Form</button>
+        
+        <span data-lokalise="status_online" class="translatable">Status: Online</span>
+    </div>
+
+    <div class="demo-section">
+        <h2 data-lokalise="section_navigation">Navigation Elements</h2>
+        <nav>
+            <a href="#" data-lokalise="nav_home" class="translatable">Home</a> |
+            <a href="#" data-lokalise="nav_products" class="translatable">Products</a> |
+            <a href="#" data-lokalise="nav_about" class="translatable">About</a> |
+            <a href="#" data-lokalise="nav_contact" class="translatable">Contact</a>
+        </nav>
+    </div>
+
+    <div class="demo-section">
+        <h2 data-lokalise="section_form_elements">Form Elements</h2>
+        <form>
+            <label data-lokalise="label_name" class="translatable">Your Name:</label>
+            <input type="text" placeholder="Enter your name">
+            
+            <br><br>
+            
+            <label data-lokalise="label_email" class="translatable">Email Address:</label>
+            <input type="email" placeholder="Enter your email">
+            
+            <br><br>
+            
+            <label data-lokalise="label_message" class="translatable">Message:</label>
+            <textarea placeholder="Enter your message" data-lokalise="placeholder_message" class="translatable"></textarea>
+            
+            <br><br>
+            
+            <button type="button" data-lokalise="button_send" class="translatable">Send Message</button>
+        </form>
+    </div>
+
+    <div class="demo-section">
+        <h2 data-lokalise="section_list_elements">List Elements</h2>
+        <ul>
+            <li data-lokalise="feature_1" class="translatable">Easy to use interface</li>
+            <li data-lokalise="feature_2" class="translatable">Real-time collaboration</li>
+            <li data-lokalise="feature_3" class="translatable">Advanced security features</li>
+            <li data-lokalise="feature_4" class="translatable">24/7 customer support</li>
+        </ul>
+    </div>
+
+    <div class="demo-section">
+        <h2 data-lokalise="section_mixed_content">Mixed Content</h2>
+        <p>This section contains 
+            <strong data-lokalise="emphasis_important" class="translatable">important information</strong> 
+            that needs to be 
+            <em data-lokalise="emphasis_carefully" class="translatable">carefully translated</em>.
+        </p>
+        
+        <div data-lokalise="info_box" class="translatable">
+            This is an information box that contains multiple sentences. 
+            It demonstrates how longer text content can be edited through the extension.
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h2>Custom Attribute Demo</h2>
+        <p>These elements use a custom attribute (<code>data-i18n</code>) instead of the default <code>data-lokalise</code>:</p>
+        
+        <p data-i18n="custom_message_1" class="translatable">This uses data-i18n attribute</p>
+        <span data-i18n="custom_message_2" class="translatable">Another custom attribute example</span>
+        
+        <div class="instructions">
+            <strong>Note:</strong> To edit these elements, change the "Target Attribute" setting in the extension to <code>data-i18n</code>.
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h2 data-lokalise="section_dynamic_content">Dynamic Content Test</h2>
+        <button onclick="addDynamicContent()" data-lokalise="button_add_content" class="translatable">Add Dynamic Content</button>
+        <div id="dynamic-container"></div>
+    </div>
+
+    <script>
+        function addDynamicContent() {
+            const container = document.getElementById('dynamic-container');
+            const newElement = document.createElement('p');
+            newElement.setAttribute('data-lokalise', 'dynamic_text_' + Date.now());
+            newElement.className = 'translatable';
+            newElement.textContent = 'This is dynamically added content: ' + new Date().toLocaleTimeString();
+            container.appendChild(newElement);
+        }
+
+        // Add some dynamic content on page load
+        setTimeout(() => {
+            addDynamicContent();
+        }, 2000);
+    </script>
+
+    <footer>
+        <p data-lokalise="footer_copyright" class="translatable">© 2024 Demo Company. All rights reserved.</p>
+        <p data-lokalise="footer_disclaimer" class="translatable">This is a demo page for testing the Weblate Chrome extension.</p>
+    </footer>
+</body>
+</html>

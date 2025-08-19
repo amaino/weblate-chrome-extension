@@ -1,0 +1,195 @@
+/* Styles for the Weblate edit icons */
+.weblate-edit-icon {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 18px;
+  height: 18px;
+  background: #4CAF50;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 10px;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  transition: all 0.2s ease;
+  -webkit-user-select: none;
+  user-select: none;
+  border: 1px solid white;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.weblate-edit-icon:hover {
+  background: #45a049;
+  transform: scale(1.15);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+}
+
+/* Dialog styles */
+.weblate-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100000;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.weblate-dialog {
+  background: white;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.weblate-dialog-header {
+  background: #4CAF50;
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.weblate-dialog-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.weblate-close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.weblate-close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.weblate-dialog-content {
+  padding: 20px;
+}
+
+.weblate-field {
+  margin-bottom: 15px;
+}
+
+.weblate-field label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.weblate-field input,
+.weblate-field textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: inherit;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+.weblate-field input:focus,
+.weblate-field textarea:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.weblate-field input[readonly] {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.weblate-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.weblate-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.weblate-btn-primary {
+  background: #4CAF50;
+  color: white;
+}
+
+.weblate-btn-primary:hover {
+  background: #45a049;
+}
+
+.weblate-btn-secondary {
+  background: #f5f5f5;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.weblate-btn-secondary:hover {
+  background: #e0e0e0;
+}
+
+.weblate-status {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.weblate-status-success {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.weblate-status-error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Reset styles to prevent conflicts */
+#weblate-dialog-container * {
+  box-sizing: border-box;
+}
+
+#weblate-dialog-container {
+  all: initial;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}

@@ -1,0 +1,33 @@
+{
+  "name": "weblate-chrome-extension",
+  "version": "1.0.0",
+  "description": "A Chrome extension for in-context editing of Weblate translations",
+  "main": "manifest.json",
+  "scripts": {
+    "start": "start-extension.bat",
+    "validate": "node validate.js",
+    "build": "npm run validate && echo Extension ready for packaging",
+    "dev": "npm run start",
+    "test": "npm run validate && echo All tests passed",
+    "package": "echo Creating extension package... && powershell Compress-Archive -Path *.js,*.json,*.html,*.css,icons -DestinationPath weblate-extension.zip -Force && echo Package created: weblate-extension.zip"
+  },
+  "keywords": [
+    "weblate",
+    "translation",
+    "chrome-extension",
+    "i18n",
+    "localization"
+  ],
+  "author": "Weblate Extension Developer",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amaino/weblate-chrome-extension.git"
+  },
+  "bugs": {
+    "url": "https://github.com/amaino/weblate-chrome-extension/issues"
+  },
+  "homepage": "https://github.com/amaino/weblate-chrome-extension#readme",
+  "devDependencies": {},
+  "dependencies": {}
+}
